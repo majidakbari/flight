@@ -4,11 +4,11 @@ import { Airport } from "../entities/Airport";
 
 export const db: ConnectionOptions = {
     type: "postgres",
-    host: "localhost",
+    host: "flight-db",
     port: 5432,
-    username: "flight",
-    password: "secret_password",
-    database: "flights",
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
     entities: [
         Airport
     ],

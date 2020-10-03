@@ -3,7 +3,7 @@ LABEL maintainer="Majid Akbari <majidakbariiii@gmail.com>"
 
 RUN mkdir /node
 COPY ./app /node
-RUN rm -rf /node/node_modules
+RUN rm -rf /node/node_module
 RUN cd /node && npm install && npx tsc
 RUN npm install -g pm2 --no-optional
 
