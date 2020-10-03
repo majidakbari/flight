@@ -1,2 +1,0 @@
-postgreSQL does not allow to have .gitignore or any other hidden files to be mapped in its data directory;
-So we have to keep this file just for the sake of pushing an empty directory into git repository.

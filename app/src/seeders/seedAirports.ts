@@ -1,9 +1,8 @@
-import { createConnection } from "typeorm";
-import { databaseConfig } from "../config/databaseConfig";
 import { airports } from "./data/airports"
 import { Airport } from "../entities/Airport";
+import { dbConnection } from "../utils/dbConnection";
 
-createConnection(databaseConfig).then(connection => {
+dbConnection.then(connection => {
     const airportRepository = connection.getRepository(Airport);
 
     airports.forEach(function (value) {
@@ -16,12 +15,6 @@ createConnection(databaseConfig).then(connection => {
         airport.city = value.city;
         airport.country = value.country;
 
-        airportRepository.save(airport)
-            .then(() => console.log("New record has been saved successfully!"))
-            .catch(err => {
-                throw err
-            });
+        airportRepository.save(airport);
     });
-
-
-}).then(err => console.log(err));
+}).then(() => console.log("Seeding database..."));
