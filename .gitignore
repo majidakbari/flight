@@ -1,0 +1,6 @@
+.idea
+.env
+app/node_modules
+app/dist
+./.data/database/**
+!./.data/database/dummy.txt

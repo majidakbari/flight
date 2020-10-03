@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+
+  ## --------------------------------------------------
+  ## | Web Server and application pm2 (node)
+  ## --------------------------------------------------
+  flight-app:
+    container_name: flight-app
+    build:
+      context: ./
+      dockerfile: ./.docker/Dockerfile
+    ports:
+      - "9095:3000"
+    restart: always
+    depends_on:
+      - flight-db
+    env_file:
+      - .env
+
+  ## --------------------------------------------------
+  ## | Database Server (Mongo 4.0.10 )
+  ## --------------------------------------------------
+  flight-db:
+    container_name: flight-db
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - ./.data/database:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
