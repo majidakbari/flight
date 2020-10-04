@@ -1,4 +1,20 @@
-import { createConnection } from "typeorm";
 import { db } from "../config/db";
+import { Connection, createConnection } from "typeorm";
 
-export const dbConnection = createConnection(db).catch(err => {throw err});
+let connection: Connection;
+
+const connectToDb: () => Promise<Connection> = async () => {
+    try {
+        connection = await createConnection(db);
+        return connection;
+    } catch (e) {
+        throw e;
+    }
+};
+
+export const dbConnection: () => Promise<Connection> = async () => {
+    if (connection != undefined) {
+        return connection;
+    }
+    return connectToDb();
+};

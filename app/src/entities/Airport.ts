@@ -11,11 +11,8 @@ export class Airport {
     @Column()
     icao: string;
 
-    @Column("decimal")
-    lat: number;
-
-    @Column("decimal")
-    lon: number;
+    @Column("point")
+    geom: string;
 
     @Column()
     name: string;
