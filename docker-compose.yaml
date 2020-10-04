@@ -8,7 +8,7 @@ services:
     container_name: flight-app
     build:
       context: ./
-      dockerfile: ./.docker/Dockerfile
+      dockerfile: .docker/app/Dockerfile
     ports:
       - "${APP_PORT}:${NODE_PORT}"
     restart: always
@@ -22,7 +22,9 @@ services:
   ## --------------------------------------------------
   flight-db:
     container_name: flight-db
-    image: postgres:latest
+    build:
+      context: ./.docker/db
+      dockerfile: Dockerfile
     expose:
       - "5432"
     restart: always
