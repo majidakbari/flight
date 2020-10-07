@@ -12,7 +12,7 @@ const connectToDb: () => Promise<Connection> = async () => {
     }
 };
 
-export const dbConnection: () => Promise<Connection> = async () => {
+export const getDbConnection: () => Promise<Connection> = async () => {
     if (connection != undefined) {
         return connection;
     }

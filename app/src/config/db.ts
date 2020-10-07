@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import { ConnectionOptions } from "typeorm";
 import { Airport } from "../entities/Airport";
+import { AirportRoute } from "../entities/AirportRoute";
 
 export const db: ConnectionOptions = {
     type: "postgres",
@@ -10,7 +11,8 @@ export const db: ConnectionOptions = {
     password: "secret_password",
     database: "flights",
     entities: [
-        Airport
+        Airport,
+        AirportRoute
     ],
     synchronize: true,
     logging: false
