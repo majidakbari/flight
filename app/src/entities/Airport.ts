@@ -1,8 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { Point } from "../valueObjects/point";
+import Point from "../interfaces/point";
 
 @Entity()
-export class Airport {
+class Airport {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -29,7 +29,6 @@ export class Airport {
     geom: Point;
 
     @Column()
-
     name: string;
 
     @Column()
@@ -38,3 +37,5 @@ export class Airport {
     @Column()
     country: string;
 }
+
+export default Airport;

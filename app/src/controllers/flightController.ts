@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
-import { getAirportRepository } from "../repositories/getAirportRepository";
+import getAirportRepository from "../repositories/getAirportRepository";
 
-export const search: RequestHandler = async (req, res) => {
+const search: RequestHandler = async (req, res) => {
     const airportRepo = await getAirportRepository();
     const airport = await airportRepo.findOne(1);
 
@@ -9,3 +9,6 @@ export const search: RequestHandler = async (req, res) => {
         airport: airport,
     })
 };
+
+export default search;
+

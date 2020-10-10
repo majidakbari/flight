@@ -1,11 +1,14 @@
-import { airports } from "./data/airports"
-import { Airport } from "../entities/Airport";
-import { getDbConnection } from "../utils/getDbConnection";
+import {airports} from "./data/airports"
+import Airport from "../entities/Airport";
+import getAirportRepository from "../repositories/getAirportRepository";
 
-export const seedAirports = async () => {
-    const dbConnection = await getDbConnection();
+const seedAirports = async () => {
+    const airportRepository = await getAirportRepository();
+
     for (const value of airports) {
-        await dbConnection.createQueryBuilder()
+        let airport = await airportRepository.findOne({code: value.code});
+        if (airport != undefined) continue;
+        await airportRepository.createQueryBuilder()
             .insert()
             .into(Airport)
             .values({
@@ -22,4 +25,4 @@ export const seedAirports = async () => {
     }
 };
 
-seedAirports().then(res => console.log("All the airports were inserted into db."));
+export default seedAirports;

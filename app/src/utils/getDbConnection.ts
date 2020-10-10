@@ -1,4 +1,4 @@
-import { db } from "../config/db";
+import db from "../config/db";
 import { Connection, createConnection } from "typeorm";
 
 let connection: Connection;
@@ -12,9 +12,11 @@ const connectToDb: () => Promise<Connection> = async () => {
     }
 };
 
-export const getDbConnection: () => Promise<Connection> = async () => {
+const getDbConnection: () => Promise<Connection> = async () => {
     if (connection != undefined) {
         return connection;
     }
     return connectToDb();
 };
+
+export default getDbConnection;

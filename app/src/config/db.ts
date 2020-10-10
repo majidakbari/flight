@@ -1,9 +1,9 @@
 import "reflect-metadata";
 import { ConnectionOptions } from "typeorm";
-import { Airport } from "../entities/Airport";
-import { AirportRoute } from "../entities/AirportRoute";
+import Airport from "../entities/Airport";
+import AirportRoute from "../entities/AirportRoute";
 
-export const db: ConnectionOptions = {
+const db: ConnectionOptions = {
     type: "postgres",
     host: "localhost",
     port: 5432,
@@ -17,3 +17,5 @@ export const db: ConnectionOptions = {
     synchronize: true,
     logging: false
 };
+
+export default db;

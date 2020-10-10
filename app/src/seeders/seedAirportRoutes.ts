@@ -1,11 +1,11 @@
 import { airportRoutes } from "./data/airportRoutes";
-import {AirportRoute} from "../entities/AirportRoute";
-import {getAirportRepository} from "../repositories/getAirportRepository";
-import {getDbConnection} from "../utils/getDbConnection";
+import AirportRoute from "../entities/AirportRoute";
+import getAirportRepository from "../repositories/getAirportRepository";
+import getAirportRouteRepository from "../repositories/getAirportRouteRepository";
 
-export const seedAirportRoutes = async () => {
+const seedAirportRoutes = async () => {
     const airportRepository = await getAirportRepository();
-    const connection = (await getDbConnection());
+    const airportRouteRepository = await getAirportRouteRepository();
 
     for (const route of airportRoutes) {
         let source = await airportRepository.findOne({code: route.s});
@@ -13,7 +13,11 @@ export const seedAirportRoutes = async () => {
         if (source == undefined || target == undefined) {
             continue;
         }
-        await connection.createQueryBuilder()
+        let existingRoute = await airportRouteRepository.findOne({source: source.id, target: target.id});
+        if (existingRoute != undefined){
+            continue;
+        }
+        await airportRouteRepository.createQueryBuilder()
             .insert()
             .into(AirportRoute)
             .values({
@@ -33,19 +37,4 @@ export const seedAirportRoutes = async () => {
     }
 };
 
-seedAirportRoutes().then(res => console.log("All the routes were inserted into db."));
-//
-// SELECT
-// p.seq, p.node, p.cost, r.geom as edge_geom, c.name
-// FROM
-// pgr_dijkstra(
-//     'SELECT id, source, target, distance AS cost FROM airport_route',
-//     (SELECT id FROM airport WHERE code = 'IKA'),
-// (SELECT id FROM airport WHERE code = 'LAS'),
-// TRUE
-// ) AS p
-// LEFT JOIN airport_route AS r ON p.edge = r.id
-// LEFT JOIN airport AS c ON p.node = c.id
-//
-// ORDER BY
-// p.seq;
+export default seedAirportRoutes;

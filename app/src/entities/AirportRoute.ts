@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class AirportRoute {
+class AirportRoute {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -22,3 +22,5 @@ export class AirportRoute {
     @Column()
     distance: number;
 }
+
+export default AirportRoute;

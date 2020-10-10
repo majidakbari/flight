@@ -4,9 +4,9 @@ import helmet from "helmet";
 import express from "express";
 import appRouter from "../routes/index";
 import corsHandler from "../middlewares/corsHandler";
-import { errorHandler } from "../middlewares/errorHandler";
-import { routeHandler } from "../middlewares/routeHandler";
-import { acceptableHandler } from "../middlewares/acceptableHandler";
+import errorHandler from "../middlewares/errorHandler";
+import routeHandler from "../middlewares/routeHandler";
+import acceptableHandler from "../middlewares/acceptableHandler";
 
 dotenv.config();
 
