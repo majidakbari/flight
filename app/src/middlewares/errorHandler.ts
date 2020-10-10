@@ -1,8 +1,8 @@
-import {Request, Response, NextFunction} from "express";
+import {Request, Response, NextFunction, RequestHandler, ErrorRequestHandler} from "express";
 import AbstractError from "../errors/abstractError";
 import ErrorInterface from "../interfaces/error";
 
-const errorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
+const errorHandler: ErrorRequestHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
     if (err instanceof AbstractError) {
         const error: ErrorInterface = {
             error: "Client Error",

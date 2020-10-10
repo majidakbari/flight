@@ -1,6 +1,6 @@
 import MethodNotAllowedError from "../errors/methodNotAllowedError";
 
-const methodNotAllowed = () => {
+const methodNotAllowed: () => void = () => {
     throw new MethodNotAllowedError();
 };
 

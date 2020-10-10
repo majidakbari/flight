@@ -25,8 +25,8 @@ services:
     build:
       context: ./.docker/db
       dockerfile: Dockerfile
-    ports:
-      - "5432:5432"
+    expose:
+      - "5432"
     restart: always
     environment:
       POSTGRES_USER: ${DB_USER}

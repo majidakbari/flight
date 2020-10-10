@@ -19,13 +19,13 @@ psql --no-password --dbname="$POSTGRES_DB" <<-'EOSQL'
         CREATE TYPE  EdgeDataset AS (id int, source int, destination int, distance float);
         CREATE TYPE NodeEstimateDataType AS (id int, ind int, estimate int, predecessor int);
 
-        CREATE OR REPLACE FUNCTION shortest_path(startnode int, endnode int)
+       CREATE OR REPLACE FUNCTION shortest_path1(startnode int, endnode int)
         RETURNS TABLE
                 (
                     id          int,
                     airport_id  int,
-                    estimate    int,
                     code        varchar,
+                    name        varchar,
                     city        varchar,
                     country     varchar
                 )
@@ -33,9 +33,8 @@ psql --no-password --dbname="$POSTGRES_DB" <<-'EOSQL'
         $BODY$
         DECLARE
             rowcount   int;
-            temprow    NodeEstimateDataType1;
+            temprow    NodeEstimateDataType;
             counter    int := 1;
-            isConverge int;
         BEGIN
             -- Create a temporary table for storing the estimates as the algorithm runs
             CREATE TEMP TABLE nodeestimate OF NodeEstimateDataType
@@ -52,6 +51,7 @@ psql --no-password --dbname="$POSTGRES_DB" <<-'EOSQL'
                 predecessor int,
                 code        varchar,
                 city        varchar,
+                name        varchar,
                 country     varchar
             ) ON COMMIT DROP;
 
@@ -113,6 +113,7 @@ psql --no-password --dbname="$POSTGRES_DB" <<-'EOSQL'
                                        n.estimate,
                                        n.predecessor,
                                        airport.code,
+                                       airport.name,
                                        airport.city,
                                        airport.country
                                 FROM nodeestimate n
@@ -131,6 +132,7 @@ psql --no-password --dbname="$POSTGRES_DB" <<-'EOSQL'
                                                n.predecessor,
                                                airport.code,
                                                airport.city,
+                                               airport.name,
                                                airport.country
                                         FROM nodeestimate n
                                                  INNER JOIN airport ON airport.id = n.id
@@ -141,7 +143,7 @@ psql --no-password --dbname="$POSTGRES_DB" <<-'EOSQL'
                     counter := counter - 1;
                 end loop;
 
-            return query SELECT r.id, r.airport_id, r.estimate, r.code, r.city, r.country from result r ORDER BY id;
+            return query SELECT r.id, r.airport_id, r.code, r.name, r.city, r.country from result r ORDER BY id;
 
         END;
         $BODY$

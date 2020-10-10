@@ -18,4 +18,4 @@ app.use(acceptableHandler);
 app.use(appRouter);
 app.use(routeHandler);
 app.use(errorHandler);
-app.listen(3000);
+app.listen(process.env.NODE_PORT);

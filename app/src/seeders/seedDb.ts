@@ -1,12 +1,11 @@
 import seedAirports from "./seedAirports";
 import seedAirportRoutes from "./seedAirportRoutes";
-import getDbConnection from "../utils/getDbConnection";
+import createIndex from "./createIndex";
 
 const seedDb = async() => {
   await seedAirports();
   await seedAirportRoutes();
-  const connection = await getDbConnection();
-  await connection.query("select pgr_createVerticesTable('airport_route','geom','source','target');");
+  await createIndex();
 };
 
 

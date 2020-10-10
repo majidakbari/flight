@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {Column, Entity, Index, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity()
 class AirportRoute {
@@ -6,9 +6,11 @@ class AirportRoute {
     id: number;
 
     @Column()
+    @Index()
     source: number;
 
     @Column()
+    @Index()
     target: number;
 
     @Column({
@@ -17,6 +19,7 @@ class AirportRoute {
         spatialFeatureType: "LineString",
         srid: 4326
     })
+    @Index()
     geom: string;
 
     @Column()
