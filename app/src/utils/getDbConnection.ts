@@ -16,7 +16,7 @@ const getDbConnection: () => Promise<Connection> = async () => {
     if (connection != undefined) {
         return connection;
     }
-    return connectToDb();
+    return await connectToDb();
 };
 
 export default getDbConnection;

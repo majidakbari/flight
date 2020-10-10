@@ -19,7 +19,7 @@ psql --no-password --dbname="$POSTGRES_DB" <<-'EOSQL'
         CREATE TYPE  EdgeDataset AS (id int, source int, destination int, distance float);
         CREATE TYPE NodeEstimateDataType AS (id int, ind int, estimate int, predecessor int);
 
-       CREATE OR REPLACE FUNCTION shortest_path1(startnode int, endnode int)
+       CREATE OR REPLACE FUNCTION shortest_path(startnode int, endnode int)
         RETURNS TABLE
                 (
                     id          int,
