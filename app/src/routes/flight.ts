@@ -7,9 +7,9 @@ import getFlightWithMostKLayoversController from "../controllers/getFlightWithMo
 
 const router = Router();
 
-router.route('/v1/search').get(flightSearchValidationRules, validationHandler, getFlightController)
+router.route('/v1/flight/search').get(flightSearchValidationRules, validationHandler, getFlightController)
     .all(methodNotAllowed);
-router.route('/v2/search').get(flightSearchValidationRules, validationHandler, getFlightWithMostKLayoversController)
+router.route('/v2/flight/search').get(flightSearchValidationRules, validationHandler, getFlightWithMostKLayoversController)
     .all(methodNotAllowed);
 
 

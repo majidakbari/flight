@@ -1,0 +1,214 @@
+openapi: 3.0.0
+info:
+  title: Flight service API documentation
+  contact:
+    email: majidakbariiii@gmail.com
+  license:
+    name: 'Apache 2.0'
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  version: 1.0.0
+servers:
+  - url: http://localhost:9090
+    description: Local Server
+paths:
+  /api/v1/flight/search:
+    get:
+      tags:
+        - Flight
+        - V1
+      summary: "Shortest flight itinerary."
+      description: "Finds the shortest path between two given airports using Dijkstra algorithm; It does not take the number of layovers into account."
+      operationId: "flight-search-v1"
+      parameters:
+        - $ref: '#/components/parameters/src'
+        - $ref: '#/components/parameters/dst'
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Flight'
+        404:
+          $ref: '#/components/responses/404'
+        405:
+          $ref: '#/components/responses/405'
+        406:
+          $ref: '#/components/responses/406'
+        422:
+          $ref: '#/components/responses/422'
+        500:
+          $ref: '#/components/responses/default'
+      deprecated: false
+  /api/v2/flight/search:
+    get:
+      tags:
+        - Flight
+        - V2
+      summary: "Shortest flight itinerary with most 3 layovers."
+      description: "Finds the shortest path between two given airports using some algorithm inspired by Bellman Ford and Dynamic programing algorithms."
+      operationId: "flight-search-v2"
+      parameters:
+        - $ref: '#/components/parameters/src'
+        - $ref: '#/components/parameters/dst'
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Flight'
+        404:
+          $ref: '#/components/responses/404'
+        405:
+          $ref: '#/components/responses/405'
+        406:
+          $ref: '#/components/responses/406'
+        422:
+          $ref: '#/components/responses/422'
+        500:
+          $ref: '#/components/responses/default'
+      deprecated: false
+
+components:
+  responses:
+    404:
+      description: "Route not found."
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Client Error"
+              message:
+                type: string
+                example: "Route not found."
+    405:
+      description: "Method not allowed."
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Client Error"
+              message:
+                type: string
+                example: "Method not allowed."
+    406:
+      description: "Not Acceptable."
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Client Error"
+              message:
+                type: string
+                example: "This application only returns json responses."
+    422:
+      description: "Unprocessable Entity."
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Client Error"
+              message:
+                type: string
+                example: "Unprocessable Entity."
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                      example : "Invalid value"
+                    param:
+                      type: string
+                      example: "src"
+                    location:
+                      type: string
+                      enum:
+                        - "body"
+                        - "query"
+                      example: "query"
+    default:
+      description: "Internal Server Error"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Server Error"
+              message:
+                type: string
+                example: "Something went wrong."
+  parameters:
+    src:
+      in: query
+      name: "src"
+      required: true
+      schema:
+        type: string
+        example: "IKA"
+      description: "Source airport IATA code."
+    dst:
+      in: query
+      name: "dst"
+      required: true
+      schema:
+        type: string
+        example: "TLL"
+      description: "Destination airport IATA code."
+  schemas:
+    Flight:
+      description: Flight model
+      type: object
+      properties:
+        id:
+          type: number
+          format: int32
+          readOnly: true
+          example: 1
+          description: "Index of flights in an itinerary."
+        airport_id:
+          type: number
+          format: int32
+          readOnly: true
+          example: 1
+          description: "Airport model database identifier."
+        code:
+          type: string
+          readOnly: true
+          example: "TLL"
+          description: "Airport IATA code; All letters are upper case."
+        name:
+          type: string
+          readOnly: true
+          example: "Ulemiste Airport"
+          description: "Airport model name."
+        city:
+          type: string
+          readOnly: true
+          example: "Tallinn"
+          description: "Airport city name"
+        country:
+          type: string
+          readOnly: true
+          example: "Estonia"
+          description: "Airport country name."

@@ -3,6 +3,6 @@ import flightRouter from "./flight";
 
 const router = Router();
 
-router.use("/flight", flightRouter);
+router.use("/api", flightRouter);
 
 export default router;
