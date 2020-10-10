@@ -13,9 +13,11 @@ class flightRepository {
             "ORDER BY p.seq;");
     }
 
-    public static async shortestPathWithMostKEdges(sourceId: number, targetId: number): Promise<Flight[]> {
+    public static async shortestPathWithMostKEdges(sourceId: number, targetId: number, maxNodes: number): Promise<Flight[]> {
         const connection = await getDbConnection();
-        return await connection.query("SELECT * from shortest_path($1, $2)", [sourceId, targetId]);
+        return await connection.query("SELECT * from shortest_path($1, $2, $3)",
+            [sourceId, targetId, maxNodes]
+        );
     }
 }
 
