@@ -1,6 +1,6 @@
 interface Point {
-    x: number;
-    y: number;
+    lat: number;
+    lon: number;
 }
 
 export default Point;

@@ -1,6 +1,6 @@
-import {Request, Response, NextFunction, RequestHandler, ErrorRequestHandler} from "express";
 import AbstractError from "../errors/abstractError";
 import ErrorInterface from "../interfaces/error";
+import {Request, Response, NextFunction, ErrorRequestHandler} from "express";
 
 const errorHandler: ErrorRequestHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
     if (err instanceof AbstractError) {

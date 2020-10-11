@@ -1,5 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import Point from "../interfaces/point";
+import GeoLocation from "../interfaces/geoLocation";
 
 @Entity()
 class Airport {
@@ -18,11 +19,11 @@ class Airport {
         spatialFeatureType: "Point",
         srid: 4326,
         transformer: {
-            to(value: any): any {
-                return eval(`ST_GeomFromGeoJSON(${JSON.stringify(value)})`);
+            to(value: Point): Point {
+                return value;
             },
-            from(value: any): any {
-                 return {x: value.coordinates[0], y: value.coordinates[1]};
+            from(value: GeoLocation): Point {
+                 return {lat: value.coordinates[0], lon: value.coordinates[1]};
             }
         }
     })

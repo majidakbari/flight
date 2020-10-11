@@ -9,5 +9,5 @@ const seedDb = async() => {
 };
 
 
-seedDb().then(res => console.log("All done!"));
+seedDb().then(() => console.log("All done!"));
 

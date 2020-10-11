@@ -4,8 +4,7 @@ import ModelNotFoundError from "../errors/modelNotFoundError";
 import findAirportByCodeService from "../services/findAirportByCodeService";
 import findShortestPathWithMostKEdgesService from "../services/findShortestPathWithMostKEdgesService";
 
-const getShortestPathWithMostKEdges: (src: string, tgt: string) => Promise<Flight[]> =
-    async (src: string, dst: string) => {
+const getShortestPathWithMostKEdges = async (src: string, dst: string): Promise<Flight[]> => {
         const source = await findAirportByCodeService(src);
         const target = await findAirportByCodeService(dst);
         if (source && target) {

@@ -34964,4 +34964,4 @@ export const airports = [
     "country": "Antarctica",
     "icao": ""
   }
-]
+];

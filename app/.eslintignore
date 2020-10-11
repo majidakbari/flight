@@ -1,0 +1,4 @@
+node_modules
+dist
+src/seeders/data/airports.ts
+src/seeders/data/airportRoutes.ts

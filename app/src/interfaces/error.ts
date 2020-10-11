@@ -1,7 +1,9 @@
+import {ValidationError} from "express-validator";
+
 interface Error {
     error: string;
     message: string;
-    details?: object[];
+    details?: ValidationError[];
 }
 
 export default Error;
