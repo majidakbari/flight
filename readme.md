@@ -6,7 +6,7 @@ It has 3 different APIs for finding the best itinerary and flights between two g
 
 * V1: Shortest path between source and destination (Using Dijkstra under the hood)  
 * V2: Shortest path between source and destination with at most 3 layovers (Using combination of Dynamic programing and Bellman Ford under the hood)  
-* v3: Shortest path between source and destination with at most 3 layovers, and the possibility of taking some amount of path by car. (Same as V2 but it looks for airports in 100 Km of distance around and finds more routes.) 
+* v3: Shortest path between source and destination with at most 3 layovers, and the possibility of taking some amount of path by car or ferry. (Same as V2 but it looks for airports in 100 Km of distance around and finds more routes.) 
 
 ## Features Overview
 * Fully isolated and dockerized application

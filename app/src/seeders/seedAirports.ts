@@ -17,7 +17,7 @@ const seedAirports = async (): Promise<void> => {
                 city: value.city,
                 country: value.country,
                 geom: () => {
-                    return `ST_SetSRID(ST_Point(${value.lat}, ${value.lon}), 4326)`
+                    return `ST_SetSRID(ST_Point(${value.lon}, ${value.lat}), 4326)`
                 }
             }).execute();
 

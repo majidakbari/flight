@@ -1,7 +1,8 @@
 import "reflect-metadata";
-import { ConnectionOptions } from "typeorm";
 import Airport from "../entities/Airport";
+import { ConnectionOptions } from "typeorm";
 import AirportRoute from "../entities/AirportRoute";
+import ImaginaryAirportRoute from "../entities/ImaginaryAirportRoute";
 
 const db: ConnectionOptions = {
     type: "postgres",
@@ -12,7 +13,8 @@ const db: ConnectionOptions = {
     database: process.env.DB_NAME,
     entities: [
         Airport,
-        AirportRoute
+        AirportRoute,
+        ImaginaryAirportRoute
     ],
     synchronize: true,
     logging: false

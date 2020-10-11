@@ -24,12 +24,12 @@ const seedAirportRoutes = async (): Promise<void> => {
                 source: source.id,
                 target: target.id,
                 distance: () => {
-                    return `ST_Distance(ST_SetSRID(ST_Point(${source?.geom.lat}, ${source?.geom.lon}), 4326)::GEOGRAPHY,` +
-                    `ST_SetSRID(ST_Point(${target?.geom.lat}, ${target?.geom.lon}), 4326)::GEOGRAPHY)`;
+                    return `ST_Distance(ST_SetSRID(ST_Point(${source?.geom.lon}, ${source?.geom.lat}), 4326)::GEOGRAPHY,` +
+                    `ST_SetSRID(ST_Point(${target?.geom.lon}, ${target?.geom.lat}), 4326)::GEOGRAPHY)`;
                 },
                 geom: () => {
-                    return `ST_MakeLine(ST_SetSRID(ST_Point(${source?.geom.lat}, ${source?.geom.lon}), 4326),` +
-                        `ST_SetSRID(ST_Point(${target?.geom.lat}, ${target?.geom.lon}), 4326))::GEOMETRY(LineString,4326)`;
+                    return `ST_MakeLine(ST_SetSRID(ST_Point(${source?.geom.lon}, ${source?.geom.lat}), 4326),` +
+                        `ST_SetSRID(ST_Point(${target?.geom.lon}, ${target?.geom.lat}), 4326))::GEOMETRY(LineString,4326)`;
                 },
             }).execute();
 

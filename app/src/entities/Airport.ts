@@ -23,7 +23,7 @@ class Airport {
                 return value;
             },
             from(value: GeoLocation): Point {
-                 return {lat: value.coordinates[0], lon: value.coordinates[1]};
+                 return {lat: value.coordinates[1], lon: value.coordinates[0]};
             }
         }
     })

@@ -10126,8 +10126,8 @@ export const airports = [
   },
   {
     "code": "HEL",
-    "lat": "60.3243",
-    "lon": "24.9688",
+    "lat": "60.3210",
+    "lon": "24.9529",
     "name": "Helsinki Vantaa Airport",
     "city": "Vantaa",
     "country": "Finland",
@@ -11323,8 +11323,8 @@ export const airports = [
   },
   {
     "code": "IKA",
-    "lat": "35.5683",
-    "lon": "51.4436",
+    "lat": "35.4095",
+    "lon": "51.1552",
     "name": "Imam Khomeini International Airport",
     "city": "Tehran",
     "country": "Iran",
@@ -26992,8 +26992,8 @@ export const airports = [
   },
   {
     "code": "TLL",
-    "lat": "59.4121",
-    "lon": "24.8297",
+    "lat": "59.4140",
+    "lon": "24.8335",
     "name": "Ulemiste Airport",
     "city": "Tallinn",
     "country": "Estonia",
