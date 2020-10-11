@@ -10,9 +10,6 @@ class Airport {
     @Column()
     code: string;
 
-    @Column()
-    icao: string;
-
     @Column({
         type: "geometry",
         nullable: false,

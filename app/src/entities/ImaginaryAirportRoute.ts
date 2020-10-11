@@ -12,6 +12,9 @@ class ImaginaryAirportRoute {
     @Column()
     @Index()
     target: number;
+
+    @Column()
+    distance: number
 }
 
 export default ImaginaryAirportRoute;

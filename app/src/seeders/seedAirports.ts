@@ -1,4 +1,4 @@
-import {airports} from "./data/airports"
+import airports from "./data/airports"
 import Airport from "../entities/Airport";
 import getAirportRepository from "../repositories/getAirportRepository";
 
@@ -12,12 +12,11 @@ const seedAirports = async (): Promise<void> => {
             .into(Airport)
             .values({
                 code: value.code,
-                icao: value.icao,
                 name: value.name,
                 city: value.city,
                 country: value.country,
                 geom: () => {
-                    return `ST_SetSRID(ST_Point(${value.lon}, ${value.lat}), 4326)`
+                    return `ST_SetSRID(ST_Point(${value._geoloc.lng}, ${value._geoloc.lat}), 4326)`
                 }
             }).execute();
 

@@ -15,14 +15,14 @@ const seedImaginaryAirportRoutes = async (): Promise<void> => {
         const airports = await airportRepository.find({take: chunkSize, skip: (iteration - 1) * chunkSize});
         for (const airport of airports) {
             const nearByAirports = await dbConnection.query(
-                "select * from airport a where ST_Distance(a.geom::geography, " +
-                `ST_Point(${airport.geom.lon}, ${airport.geom.lat})::geography) < 100000` +
-                "AND a.id != $1", [airport.id]
+                "select * from airport a, ST_Distance(a.geom::geography, " +
+                `ST_Point(${airport.geom.lon}, ${airport.geom.lat})::geography) st where st < 100000`
             );
             for (const nearbyAirport of nearByAirports) {
                 const imaginaryAirportRoute = new ImaginaryAirportRoute();
                 imaginaryAirportRoute.source = airport.id;
                 imaginaryAirportRoute.target = nearbyAirport.id;
+                imaginaryAirportRoute.distance = parseInt(nearbyAirport.st);
                 await imaginaryAirportRouteRepository.save(imaginaryAirportRoute);
                 console.log(`Seeding nearby airport routes; ${airport.code} -> ${nearbyAirport.code}...`)
             }
