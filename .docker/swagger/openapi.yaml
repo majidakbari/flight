@@ -73,7 +73,37 @@ paths:
         500:
           $ref: '#/components/responses/default'
       deprecated: false
-
+  /api/v3/flight/search:
+    get:
+      tags:
+        - Flight
+        - V3
+      summary: "Shortest flight itinerary with at most 3 layovers with the possibility of taking some amount of path by car or ferry."
+      description: "Finds the shortest path between two given airports using some algorithm inspired by Bellman Ford and Dynamic programing algorithms."
+      operationId: "flight-search-v3"
+      parameters:
+        - $ref: '#/components/parameters/src'
+        - $ref: '#/components/parameters/dst'
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Flight'
+        404:
+          $ref: '#/components/responses/404'
+        405:
+          $ref: '#/components/responses/405'
+        406:
+          $ref: '#/components/responses/406'
+        422:
+          $ref: '#/components/responses/422'
+        500:
+          $ref: '#/components/responses/default'
+      deprecated: false
 components:
   responses:
     404:
